@@ -28,14 +28,16 @@ RUN git clone https://github.com/GEOS-DEV/thirdPartyLibs.git && \
     git submodule update
 
 RUN cd thirdPartyLibs && \
-    python scripts/config-build.py -hc ../geode.cmake -bt Release -ip ../ && \
+    python scripts/config-build.py -hc /geos/geode.cmake -bt Release -ip /usr/local && \
     cd build-geode-release && \
     make -j
 
 RUN cd GEOS && \
-    python scripts/config-build.py -hc ../geode.cmake -bt Release -ip ../ && \
+    python scripts/config-build.py -hc /geos/geode.cmake -bt Release -ip /usr/local && \
     cd build-geode-release && \
     make -j3  && \
     make install
 
-#RUN rm -rf GEOS thirdPartyLibs && apt-get purge cmake git build-essential git-lfs 
+RUN rm -rf /geos && apt-get purge cmake git build-essential git-lfs
+
+WORKDIR /

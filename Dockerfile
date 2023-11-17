@@ -5,7 +5,7 @@ WORKDIR /geos
 # Upgrade system and package manager
 RUN apt-get update && apt-get upgrade
 # Install tools for C++
-RUN apt-get install -y cmake git build-essential ninja-build git-lfs gfortran libopenblas-dev bison flex libopenmpi-dev
+RUN apt-get install -y cmake git build-essential git-lfs gfortran libopenblas-dev bison flex libopenmpi-dev
 
 # Copy configure file code here
 # replace the environment.cmake?
@@ -28,16 +28,16 @@ RUN git clone https://github.com/GEOS-DEV/thirdPartyLibs.git && \
     git submodule update
 
 RUN cd thirdPartyLibs && \
-    python scripts/config-build.py -n -hc /geos/geode.cmake -bt Release -ip /usr/local && \
+    python scripts/config-build.py -hc /geos/geode.cmake -bt Release -ip /usr/local && \
     cd build-geode-release && \
-    ninja
+    make -j
 
 RUN cd GEOS && \
-    python scripts/config-build.py -n -hc /geos/geode.cmake -bt Release -ip /usr/local && \
+    python scripts/config-build.py -hc /geos/geode.cmake -bt Release -ip /usr/local && \
     cd build-geode-release && \
-    ninja  && \
-    ninja install
+    make -j  && \
+    make install
 
-RUN rm -rf /geos && apt-get purge cmake git build-essential git-lfs ninja-build
+RUN rm -rf /geos && apt-get purge cmake git build-essential git-lfs
 
 WORKDIR /

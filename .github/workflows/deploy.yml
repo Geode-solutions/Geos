@@ -7,7 +7,7 @@ jobs:
   deploy:
     uses: Geode-solutions/actions/.github/workflows/docker-build-squash-push.yml@master
     with:
-      image_name: 'Geos'
+      image_name: 'geos'
       tag: ${{ github.ref_name }}
     secrets: 
       TOKEN: ${{ secrets.GITHUB_TOKEN }}

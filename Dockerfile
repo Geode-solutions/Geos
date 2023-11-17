@@ -5,7 +5,7 @@ WORKDIR /geos
 # Upgrade system and package manager
 RUN apt-get update && apt-get upgrade
 # Install tools for C++
-RUN apt-get install -y cmake git build-essential git-lfs gfortran libopenblas-dev bison flex libopenmpi-dev
+RUN apt-get install -y cmake git build-essential ninja-build git-lfs gfortran libopenblas-dev bison flex libopenmpi-dev
 
 # Copy configure file code here
 # replace the environment.cmake?
@@ -38,6 +38,6 @@ RUN cd GEOS && \
     make -j3  && \
     make install
 
-RUN rm -rf /geos && apt-get purge cmake git build-essential git-lfs
+RUN rm -rf /geos && apt-get purge cmake git build-essential git-lfs ninja-build
 
 WORKDIR /

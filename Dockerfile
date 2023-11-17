@@ -38,6 +38,6 @@ RUN cd GEOS && \
     make -j  && \
     make install
 
-RUN rm -rf /geos && apt-get purge cmake git build-essential git-lfs
-
 WORKDIR /
+
+RUN rm -rf /geos && apt-get purge cmake git build-essential git-lfs

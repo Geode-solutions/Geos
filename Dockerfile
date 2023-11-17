@@ -28,15 +28,15 @@ RUN git clone https://github.com/GEOS-DEV/thirdPartyLibs.git && \
     git submodule update
 
 RUN cd thirdPartyLibs && \
-    python scripts/config-build.py -hc /geos/geode.cmake -bt Release -ip /usr/local && \
+    python scripts/config-build.py -n -hc /geos/geode.cmake -bt Release -ip /usr/local && \
     cd build-geode-release && \
-    make -j
+    ninja
 
 RUN cd GEOS && \
-    python scripts/config-build.py -hc /geos/geode.cmake -bt Release -ip /usr/local && \
+    python scripts/config-build.py -n -hc /geos/geode.cmake -bt Release -ip /usr/local && \
     cd build-geode-release && \
-    make -j3  && \
-    make install
+    ninja  && \
+    ninja install
 
 RUN rm -rf /geos && apt-get purge cmake git build-essential git-lfs ninja-build
 

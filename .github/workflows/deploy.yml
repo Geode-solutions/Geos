@@ -1,0 +1,13 @@
+name: Docker Image CD
+
+on:
+  push:
+
+jobs:
+  deploy:
+    uses: Geode-solutions/actions/.github/workflows/docker-build-squash-push.yml@master
+    with:
+      image_name: 'Geos'
+      tag: ${{ github.ref_name }}
+    secrets: 
+      TOKEN: ${{ secrets.GITHUB_TOKEN }}

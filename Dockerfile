@@ -19,7 +19,7 @@ RUN git clone https://github.com/GEOS-DEV/GEOS.git && \
     git submodule deinit integratedTests && \
     git submodule update
 
-# get geos third parties
+# get geos third parties -ip /usr/local
 RUN git clone https://github.com/GEOS-DEV/thirdPartyLibs.git && \
     cd thirdPartyLibs && \
     git lfs install && \
@@ -28,12 +28,12 @@ RUN git clone https://github.com/GEOS-DEV/thirdPartyLibs.git && \
     git submodule update
 
 RUN cd thirdPartyLibs && \
-    python scripts/config-build.py -hc /geos/geode.cmake -bt Release -ip /usr/local && \
+    python scripts/config-build.py -hc /geos/geode.cmake -bt Release && \
     cd build-geode-release && \
     make -j
 
 RUN cd GEOS && \
-    python scripts/config-build.py -hc /geos/geode.cmake -bt Release -ip /usr/local && \
+    python scripts/config-build.py -hc /geos/geode.cmake -bt Release && \
     cd build-geode-release && \
     make -j  && \
     make install

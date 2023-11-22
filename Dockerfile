@@ -1,6 +1,6 @@
 FROM python:3-slim
 
-WORKDIR /geos
+WORKDIR /code
 
 # Upgrade system and package manager
 RUN apt-get update && apt-get upgrade
@@ -28,16 +28,14 @@ RUN git clone https://github.com/GEOS-DEV/thirdPartyLibs.git && \
     git submodule update
 
 RUN cd thirdPartyLibs && \
-    python scripts/config-build.py -hc /geos/geode.cmake -bt Release && \
+    python scripts/config-build.py -hc /code/geode.cmake -bt Release -ip /geos && \
     cd build-geode-release && \
-    make -j
+    make -j2
 
 RUN cd GEOS && \
-    python scripts/config-build.py -hc /geos/geode.cmake -bt Release && \
+    python scripts/config-build.py -hc /code/geode.cmake -bt Release -ip /geos && \
     cd build-geode-release && \
-    make -j  && \
+    make -j2  && \
     make install
 
-WORKDIR /
-
-RUN rm -rf /geos && apt-get purge cmake git build-essential git-lfs
+RUN rm -rf /code && apt-get purge -y cmake git build-essential git-lfs

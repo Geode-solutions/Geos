@@ -37,6 +37,6 @@ set(ENABLE_DOXYGEN OFF CACHE BOOL "")
 set(ENABLE_XML_UPDATES OFF CACHE BOOL "")
 
 # define the path to your compiled installation directory
-set(GEOSX_TPL_DIR "/geos/thirdPartyLibs/install-geode-release" CACHE PATH "")
+set(GEOSX_TPL_DIR "/geos" CACHE PATH "")
 # let GEOS define some third party libraries information for you
-include("/geos/GEOS/host-configs/tpls.cmake")
+include("/code/GEOS/host-configs/tpls.cmake")

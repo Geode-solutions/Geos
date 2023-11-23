@@ -40,4 +40,6 @@ RUN cd GEOS && \
 
 ENV PATH="$PATH:/geos/bin"
 
+WORKDIR /
+
 RUN rm -rf /code && apt-get purge -y cmake git build-essential git-lfs

@@ -38,4 +38,6 @@ RUN cd GEOS && \
     make -j2  && \
     make install
 
+ENV PATH="$PATH:/geos/bin"
+
 RUN rm -rf /code && apt-get purge -y cmake git build-essential git-lfs
